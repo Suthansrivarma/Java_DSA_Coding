@@ -1,0 +1,39 @@
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    TreeNode(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class Main {
+    public static int findMax(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        int current = root.val;
+        int leftMax = findMax(root.left);
+        int rightMax = findMax(root.right);
+        
+        return Math.max(current, Math.max(leftMax, rightMax));
+    }
+    
+    public static void main(String[] args) {
+        // Create a sample binary tree
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(5);
+        root.right = new TreeNode(15);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(7);
+        root.right.right = new TreeNode(20);
+        
+        int max = findMax(root);
+        System.out.println("Maximum element in the binary tree: " + max);
+    }
+}
+output: Maximum element in the binary tree: 20
