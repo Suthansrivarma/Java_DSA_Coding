@@ -1,0 +1,43 @@
+class Node {
+    int data;
+    Node right, left;
+    public Node(int data) {
+        this.data = data;
+        this.right = null;
+        this.left = null;
+    }
+}
+
+class BST {
+    Node root;
+    
+    public boolean BSTC(Node root, Integer min, Integer max) {
+        if (root == null) return true;
+        if ((min != null && root.data <= min) || (max != null && root.data >= max)) {
+            return false;
+        }
+        return BSTC(root.left, min, root.data) && BSTC(root.right, root.data, max);
+    }
+    
+    // Wrapper method for easier calling
+    public boolean isBST() {
+        return BSTC(root, null, null);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BST sh = new BST();
+        sh.root = new Node(10);
+        sh.root.left = new Node(6);
+        sh.root.right = new Node(15);
+        sh.root.left.left = new Node(3);
+        sh.root.left.right = new Node(9);
+        
+        if (sh.isBST()) {
+            System.out.println("BST correct");
+        } else {
+            System.out.println("NOT BST");
+        }
+    }
+}
